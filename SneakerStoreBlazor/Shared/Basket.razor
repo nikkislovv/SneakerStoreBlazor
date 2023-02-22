@@ -1,0 +1,59 @@
+﻿@using System.Text.Json
+<CascadingValue Value="this">
+    @ChildContent
+</CascadingValue>
+
+@code {
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    public decimal TotalAmount { get; set; }
+
+    private List<Sneakers> BasketItems { get; set; } = new List<Sneakers>();
+
+    public Dictionary<string, int> ItemCounts { get; set; } = new Dictionary<string, int>();
+
+    public void AddToBasket(Sneakers sneakers)
+    {
+        BasketItems.Add(sneakers);
+        FindRepeatableItems();
+        base.StateHasChanged();
+    }
+
+    public void RemoveFromBasket(Guid id)
+    {
+        var sneakers = BasketItems.Where(i => i.Id == id);
+        var sneakersForDeleting = sneakers.LastOrDefault();
+        BasketItems.Remove(sneakersForDeleting);
+        TotalAmount -= sneakersForDeleting.Price;
+        FindRepeatableItems();
+        base.StateHasChanged();
+    }
+
+    public void CountTotalAmount()
+    {
+        TotalAmount = BasketItems.Sum(i => i.Price);
+    }
+
+    private void FindRepeatableItems()
+    {
+        ItemCounts.Clear();
+        foreach (var item in BasketItems)
+        {
+            bool repeated = false;
+            Sneakers SneakersKey = new Sneakers();
+            foreach (var key in ItemCounts.Keys)
+            {
+                if (JsonSerializer.Serialize(item) == key)
+                {
+                    repeated = true;
+                }
+            }
+            if (!repeated)
+            {
+                ItemCounts[JsonSerializer.Serialize(item)] = 0;
+            }
+            ItemCounts[JsonSerializer.Serialize(item)]++;
+        }
+    }
+}

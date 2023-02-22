@@ -1,0 +1,68 @@
+﻿@using System.Text.Json
+@inject NavigationManager MyNavigationManager
+<div class="col" style="margin-bottom:10px">
+    @if (MyNavigationManager.Uri == "https://localhost:7253/basket")
+    {
+        <a href="/sneakers/@sneakersDeserialized.Id" style="text-decoration:none">
+            <div class="card text-center h-100" style="box-shadow:0 10px 10px 5px rgba(0,0,0,0.10);border-radius:10px">
+                <img src="@sneakersDeserialized.Image" class="card-img-top h-100" alt="No Image" style="mix-blend-mode:darken;">
+                <div class="card-body">
+                    <h5 class="card-title">@sneakersDeserialized.Brand</h5>
+                    <p class="card-text">Model: @sneakersDeserialized.Model</p>
+                    <p class="card-text">Price: @sneakersDeserialized.Price$</p>
+
+                    <div onclick="@RemoveSneakersFromBasket">
+                        @ChildContent
+                        @if (ItemCount.Value > 1)
+                        {
+                            <p class="card-text">X @ItemCount.Value</p>
+                        }
+                    </div>
+                </div>
+            </div>
+        </a>
+    }
+    else
+    {
+        <a href="/sneakers/@Sneakers.Id" style="text-decoration:none">
+            <div class="card text-center h-100" style="box-shadow:0 10px 10px 5px rgba(0,0,0,0.10);border-radius:10px">
+                <img src="@Sneakers.Image" class="card-img-top h-100" alt="No Image" style="mix-blend-mode:darken;">
+                <div class="card-body">
+                    <h5 class="card-title">@Sneakers.Brand</h5>
+                    <p class="card-text">Model: @Sneakers.Model</p>
+                    <p class="card-text">Price: @Sneakers.Price$</p>
+
+                    <div onclick="@AddSneakersToBasket">
+                        @ChildContent
+                    </div>
+
+                </div>
+            </div>
+        </a>
+    }
+
+</div>
+
+@code {
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [CascadingParameter]
+    public Basket Basket { get; set; }
+
+    [Parameter] public Sneakers Sneakers { get; set; }
+
+    [Parameter] public KeyValuePair<string, int> ItemCount { get; set; }
+
+    public Sneakers sneakersDeserialized => JsonSerializer.Deserialize<Sneakers>(ItemCount.Key);
+
+    private void AddSneakersToBasket()
+    {
+        Basket.AddToBasket(Sneakers);
+    }
+
+    private void RemoveSneakersFromBasket()
+    {
+        Basket.RemoveFromBasket(sneakersDeserialized.Id);
+    }
+}

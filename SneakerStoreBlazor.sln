@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32526.322
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SneakerStoreBlazor", "SneakerStoreBlazor\SneakerStoreBlazor.csproj", "{69BFBC9B-F3F0-449A-9ABF-2A1C5A3DD4DD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SneakersApi", "SneakersApi\SneakersApi.csproj", "{8ADD3A07-3843-4AF8-81EA-77E6407B65F7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{69BFBC9B-F3F0-449A-9ABF-2A1C5A3DD4DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69BFBC9B-F3F0-449A-9ABF-2A1C5A3DD4DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69BFBC9B-F3F0-449A-9ABF-2A1C5A3DD4DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69BFBC9B-F3F0-449A-9ABF-2A1C5A3DD4DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8ADD3A07-3843-4AF8-81EA-77E6407B65F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8ADD3A07-3843-4AF8-81EA-77E6407B65F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8ADD3A07-3843-4AF8-81EA-77E6407B65F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8ADD3A07-3843-4AF8-81EA-77E6407B65F7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D2089272-DFBC-4F66-A247-C875DFB8BFE6}
+	EndGlobalSection
+EndGlobal

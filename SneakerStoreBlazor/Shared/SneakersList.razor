@@ -1,0 +1,57 @@
+﻿@inject NavigationManager MyNavigationManager
+
+@if (MyNavigationManager.Uri == "https://localhost:7253/basket")
+{
+    if (Basket.ItemCounts == null)
+    {
+        <h1 class="class=" text-center" style="color:darkslateblue;font-weight:600">Loading...</h1>
+    }
+    else if (Basket.ItemCounts.Count == 0)
+    {
+        <h1 class="class=" text-center" style="color:darkslateblue;font-weight:600">No sneakers in array...</h1>
+    }
+    else
+    {
+        <div class="container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4">
+                @foreach (var item in Basket.ItemCounts)
+                {
+                    <SneakersItem ItemCount="item">
+                        @ChildContent
+                    </SneakersItem>
+                }
+            </div>
+        </div>
+    }
+}
+else
+{
+    if (Sneakers == null)
+    {
+        <h1 class="class=" text-center" style="color:darkslateblue;font-weight:600">Loading...</h1>
+    }
+    else if (Sneakers.Count == 0)
+    {
+        <h1 class="class=" text-center" style="color:darkslateblue;font-weight:600">No sneakers in array...</h1>
+    }
+    else
+    {
+        <div class="container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4">
+                @foreach (var item in Sneakers)
+                {
+                    <SneakersItem Sneakers="item">
+                        @ChildContent
+                    </SneakersItem>
+                }
+            </div>
+        </div>
+    }
+}
+
+@code {
+    [Parameter] public RenderFragment ChildContent { get; set; }
+    [Parameter] public List<Sneakers> Sneakers { get; set; }
+    [CascadingParameter]
+    public Basket Basket { get; set; }
+}

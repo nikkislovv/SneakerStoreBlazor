@@ -1,0 +1,18 @@
+﻿@page "/"
+@inject HttpClient httpClient
+<h1 class="text-center" style="color:darkslateblue;font-weight:600">Sneakers</h1>
+
+<SneakersList Sneakers="sneakers">
+    <a href="/basket" class="btn btn-primary" style="background-color:darkslateblue">Buy</a>
+</SneakersList>
+
+@code {
+    List<Sneakers> sneakers = new List<Sneakers>();
+
+    protected async override Task OnInitializedAsync()
+    {
+        sneakers = await httpClient.GetFromJsonAsync<List<Sneakers>>("Sneakers");
+    }
+}
+
+

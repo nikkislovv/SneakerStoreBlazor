@@ -1,0 +1,22 @@
+﻿@page "/basket"
+<div class="container">
+    <h1 class="text-center" style="color:darkslateblue;font-weight:600">Basket</h1>
+    <SneakersList>
+        <a href="/basket" class="btn btn-primary" style="background-color:darkslateblue">Remove</a>
+    </SneakersList>
+    @if (Basket.ItemCounts.Count != 0)
+    {
+        <h1 style="color:darkslateblue;font-size:25px">Total Amount: @Basket.TotalAmount$</h1>
+        <a class="btn btn-primary" style="background-color:darkslateblue;">Pay</a>
+    }
+</div>
+
+@code {
+    [CascadingParameter]
+    public Basket Basket { get; set; }
+
+    protected override void OnInitialized()
+    {
+        Basket.CountTotalAmount();
+    }
+}
